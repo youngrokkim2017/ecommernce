@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 
 const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [visible, setVisible] = useState(false);
 
   return (
     <div className='min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8'>
@@ -36,14 +38,27 @@ const Login = () => {
                         </label>
                         <div className="mt-1">
                             <input 
-                                type="password" 
+                                type={ visible ? "text" : "password" }
                                 name="password" 
                                 autoComplete='current-password' 
                                 required 
-                                value={password} 
+                                value={ visible ? "text" : "password" } 
                                 onChange={(e) => setPassword(e.target.value)} 
                                 className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focuse:border-blue-500 sm:text-sm'
                             />
+                            {visible ? (
+                              <AiOutlineEye
+                                className="absolute right-2 top-2 cursor-pointer"
+                                size={25}
+                                onClick={() => setVisible(false)}
+                              />
+                            ) : (
+                              <AiOutlineEyeInvisible
+                                className="absolute right-2 top-2 cursor-pointer"
+                                size={25}
+                                onClick={() => setVisible(true)}
+                              />
+                            )}
                         </div>
                     </div>
                 </form>
